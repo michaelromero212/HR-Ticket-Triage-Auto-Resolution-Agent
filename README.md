@@ -1,6 +1,6 @@
 # HR Ticket Triage & Auto-Resolution Agent
 
-A production-ready AI-powered HR ticketing system that automatically classifies, resolves, and escalates employee HR requests. Built with React, FastAPI, and Dash+Plotly, demonstrating enterprise HR operations automation with comprehensive AI governance, PII protection, and responsible AI practices.
+An AI-powered HR ticketing system that automatically classifies, resolves, and escalates employee HR requests. This project demonstrates enterprise-grade HR operations automation with real-time analytics, comprehensive AI governance, PII protection, and responsible AI practices.
 
 <div align="center">
 
@@ -9,6 +9,60 @@ A production-ready AI-powered HR ticketing system that automatically classifies,
 ![Deflection Rate](https://img.shields.io/badge/deflection_rate-54.8%25-orange)
 
 </div>
+
+---
+
+## 🎯 Business Problems Solved
+
+This system addresses key challenges faced by modern HR departments:
+
+| Challenge | Solution |
+|-----------|----------|
+| **High Volume of Repetitive Inquiries** | AI auto-resolves common questions (PTO, benefits, 401k) instantly, reducing HR workload by 54.8%. |
+| **Slow Response Times** | Average resolution time drops from 24+ minutes (human) to **3.5 minutes** (AI-assisted). |
+| **Inconsistent Information** | Responses are grounded in a curated knowledge base, ensuring accurate and consistent policy guidance. |
+| **Lack of Visibility** | Real-time analytics dashboard tracks ticket volume, categories, and employee satisfaction. |
+| **Sensitive Data Handling** | Automatic PII detection and redaction protects employee privacy and ensures compliance. |
+| **Need for AI Oversight** | Transparent AI governance framework with confidence thresholds, human escalation, and bias monitoring. |
+
+---
+
+## 📸 Screenshots
+
+### Submit a Ticket
+Employees can submit HR questions through a clean, guided interface. The AI processes the request in real-time, classifies it into one of 15 categories, and attempts auto-resolution.
+
+![Submit Ticket](screenshots/01_submit_ticket.jpg)
+
+---
+
+### Analytics Dashboard
+Track real-time KPIs including ticket deflection rate, average resolution time, total tickets processed, and employee satisfaction scores. Interactive charts visualize category distribution and trends.
+
+![Analytics Dashboard](screenshots/02_analytics_dashboard.jpg)
+
+---
+
+### My Tickets
+View and manage all HR ticket submissions. Filter by status, category, or department. See which tickets were AI-resolved vs. escalated to a human.
+
+![My Tickets](screenshots/03_my_tickets.jpg)
+
+---
+
+### Knowledge Base
+Browse HR policies and guides. Employees can self-serve common questions about PTO, benefits, work-from-home policies, expense reimbursement, and more.
+
+![Knowledge Base](screenshots/04_knowledge_base.jpg)
+
+---
+
+### AI Governance
+Full transparency into the AI system. Displays responsible AI principles (fairness, transparency, accountability, safety, privacy), model information, performance metrics, and human oversight thresholds.
+
+![AI Governance](screenshots/05_ai_governance.jpg)
+
+---
 
 ## 🎯 Key Features
 
@@ -35,11 +89,11 @@ A production-ready AI-powered HR ticketing system that automatically classifies,
 - **Professional Design**: F-pattern layout, semantic colors, micro-interactions
 - **Multi-Step Flow**: Guided ticket submission with real-time validation
 
-### 📊 Interactive Analytics Dashboard (Dash + Plotly)
+### 📊 Interactive Analytics Dashboard
 - **KPI Cards**: Deflection rate, resolution time, CSAT score, ticket volume
-- **6 Visualizations**: Category breakdown, trends, urgency distribution, department volume, ROI calculator
+- **6 Visualizations**: Category breakdown, trends, urgency distribution, department volume, auto-resolution gauge
 - **Real-Time Updates**: Auto-refreshes every 5 minutes
-- **Drill-Down Capability**: Interactive filtering and exploration
+- **Cost Savings Calculator**: Estimates ROI from AI automation
 
 ### ⚖️ Responsible AI Framework
 - **Transparency**: Model version, training data, confidence scores displayed
@@ -47,11 +101,13 @@ A production-ready AI-powered HR ticketing system that automatically classifies,
 - **Fairness**: Equity checks across departments, flagging disparate outcomes
 - **Continuous Improvement**: Feedback loops, accuracy tracking, A/B testing ready
 
+---
+
 ## 🏗️ Architecture
 
 ```
 HR-Ticket-Triage-&-Auto-Resolution-Agent/
-├── frontend/              # React + Tailwind CSS
+├── frontend/              # React + Tailwind CSS + Plotly.js
 │   ├── src/
 │   │   ├── components/    # Reusable UI (Button, Card, Badge, Input, Modal, Toast)
 │   │   ├── pages/         # 7 pages (Submit, Queue, Analytics, KB, Governance, Privacy, Help)
@@ -59,31 +115,37 @@ HR-Ticket-Triage-&-Auto-Resolution-Agent/
 │   │   └── App.jsx        # Main app with routing and navigation
 │   └── package.json
 │
-├── backend/               # FastAPI + Google Vertex AI
+├── backend/               # FastAPI + HuggingFace AI
 │   ├── app/
 │   │   ├── services/
-│   │   │   ├── ai_service.py          # Gemini integration + classification
+│   │   │   ├── ai_service.py          # HuggingFace Phi-3 integration + classification
 │   │   │   ├── pii_detector.py        # PII detection/redaction
-│   │   │   ├── mock_data.py           # 42 realistic tickets
 │   │   │   └── mock_data.json         # Generated dataset
 │   │   ├── knowledge_base/            # 5 HR policy markdown files
 │   │   └── main.py                    # FastAPI endpoints
 │   ├── requirements.txt
-│   └── .env                           # Configuration (with your API key)
+│   └── .env                           # Configuration (with HuggingFace token)
 │
-└── analytics/             # Dash + Plotly
-    ├── dashboard.py                   # Analytics dashboard
-    └── requirements.txt
+└── screenshots/           # Application screenshots
 ```
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - **Node.js** 18+ and npm
 - **Python** 3.9+
-- **Google Vertex AI API Key** (provided: `AQ.Ab8RN6...`)
+- **HuggingFace API Token** (free tier works)
 
-### 1. Install Dependencies
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/michaelromero212/HR-Ticket-Triage-Auto-Resolution-Agent.git
+cd HR-Ticket-Triage-Auto-Resolution-Agent
+```
+
+### 2. Install Dependencies
 
 ```bash
 # Frontend
@@ -92,30 +154,33 @@ npm install
 
 # Backend
 cd ../backend
-pip3 install -r requirements.txt
-
-# Analytics
-cd ../analytics
-pip3 install -r requirements.txt
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 3. Configure Environment
 
-The `.env` file is already configured with your Vertex AI API key. No changes needed!
+```bash
+# Create .env file
+cp .env.example .env
+# Add your HuggingFace token
+echo "HUGGINGFACE_TOKEN=hf_your_token_here" >> .env
+```
 
-### 3. Generate Mock Data
+### 4. Generate Mock Data
 
 ```bash
 cd backend
-python3 app/services/mock_data.py
+python3 -c "from app.services.mock_data import generate_mock_data; generate_mock_data()"
 ```
-✅ This generates `mock_data.json` with 42 realistic tickets
 
-### 4. Launch All Services
+### 5. Launch Services
 
 **Terminal 1 - Backend API:**
 ```bash
 cd backend
+source venv/bin/activate
 uvicorn main:app --reload --port 8000
 ```
 🟢 Backend running at: http://localhost:8000
@@ -127,16 +192,11 @@ npm run dev
 ```
 🟢 Frontend running at: http://localhost:5173
 
-**Terminal 3 - Analytics Dashboard:**
-```bash
-cd analytics
-python3 dashboard.py
-```
-🟢 Analytics running at: http://localhost:8050
-
-### 5. Open the Application
+### 6. Open the Application
 
 Navigate to **http://localhost:5173** in your browser.
+
+---
 
 ## 📋 Key Pages
 
@@ -144,15 +204,17 @@ Navigate to **http://localhost:5173** in your browser.
 |------|-------|-------------|
 | **Submit Ticket** | `/` | Multi-step ticket submission with AI classification |
 | **My Tickets** | `/tickets` | Queue view with search and filtering |
-| **Analytics** | `/analytics` | Dash dashboard (iframe embedded) |
+| **Analytics** | `/analytics` | Real-time dashboard with Plotly charts |
 | **Knowledge Base** | `/knowledge-base` | Search and browse HR policies |
 | **AI Governance** | `/governance` | Responsible AI practices explained |
 | **Data Privacy** | `/privacy` | PII protection and data rights |
 | **Help Center** | `/help` | FAQ and support contacts |
 
+---
+
 ## 🧪 Testing the System
 
-### Try These 10 Example Tickets:
+### Try These Example Tickets:
 
 1. **"How do I request PTO for next week?"**
    - ✅ Auto-resolves with step-by-step Workday instructions
@@ -166,55 +228,38 @@ Navigate to **http://localhost:5173** in your browser.
    - ⚠️ Escalates to Payroll team
    - Category: Payroll Issues | Confidence: 72%
 
-4. **"I need access to the sales Salesforce instance"**
-   - ⚠️ Escalates to IT
-   - Category: IT Access Requests | Confidence: 78%
-
-5. **"How do I update my address in Workday?"**
-   - ✅ Auto-resolves with navigation steps
-   - Category: General HR Inquiries | Confidence: 94%
-
-6. **"When is open enrollment?"**
-   - ✅ Auto-resolves with dates
-   - Category: Benefits Enrollment | Confidence: 99%
-
-7. **"I'm experiencing harassment from my manager"**
+4. **"I'm experiencing harassment from my manager"**
    - 🚨 **CRITICAL**: Immediate escalation
-   - Category: General HR Inquiries | Confidence: 0%
+   - Sensitive keyword detection triggers bypass
 
-8. **"Can I work from home 3 days/week?"**
-   - ✅ Auto-resolves with policy details
-   - Category: Policy Clarifications | Confidence: 91%
-
-9. **"My SSN is 123-45-6789 and my salary seems wrong"**
+5. **"My SSN is 123-45-6789 and my salary seems wrong"**
    - 🔒 **PII DETECTED**: Redacted automatically
    - Category: Payroll Issues | Confidence: 45%
 
-10. **"What are my stock options worth?"**
-    - ⚠️ Escalates to Compensation team
-    - Category: General HR Inquiries | Confidence: 45%
+---
 
-## 📊 Analytics Dashboard
+## 📊 Analytics Metrics
 
-### KPI Cards
-- **54.8% Deflection Rate** (↑ 3% vs last month)
-- **3.2 min AI resolution** vs 24.5 min human
-- **42 Total Tickets** (last 30 days)
-- **4.6/5.0 Employee Satisfaction** ⭐
+| Metric | Value |
+|--------|-------|
+| **Deflection Rate** | 54.8% (↑ 3% vs last month) |
+| **AI Resolution Time** | 3.5 min vs 24.5 min human |
+| **Total Tickets** | 42 (last 30 days) |
+| **Employee Satisfaction** | 4.3/5.0 ⭐ |
+| **Classification Accuracy** | 94.2% |
 
-### Charts
-1. Category breakdown (horizontal bar)
-2. Tickets over time (line chart)
-3. Urgency distribution (donut chart)
-4. Department volume (bar chart)
-5. ROI calculator (interactive)
+---
 
-## 🛡️ AI Governance
+## 🛡️ AI Governance Thresholds
 
-- >85% confidence → Auto-resolve
-- 70-85% confidence → Human approval
-- <70% confidence → Immediate escalation
-- Sensitive keywords → Auto-escalate
+| Confidence | Action |
+|------------|--------|
+| > 85% | ✅ Auto-resolve |
+| 70-85% | ⚠️ Human approval required |
+| < 70% | 🚨 Immediate escalation |
+| Sensitive keywords | 🚨 Auto-escalate regardless of confidence |
+
+---
 
 ## 🔐 PII Protection
 
@@ -223,15 +268,14 @@ Automatically detects & redacts:
 - Salary amounts, medical info
 - Dates of birth, addresses
 
+---
+
 ## 🌟 Built With
 
-- React 18 + Tailwind CSS
-- FastAPI + Google Vertex AI
-- Dash + Plotly
-- 42 realistic mock tickets
-- 5 HR knowledge base documents
+- **Frontend**: React 18, Tailwind CSS, Plotly.js, Lucide Icons
+- **Backend**: FastAPI, HuggingFace Phi-3 Model
+- **Data**: 42 realistic mock tickets, 5 HR knowledge base documents
 
 ---
 
-**Built for Yahoo People Operations** | Demonstrating enterprise HR automation with AI governance
-# Project Status: Complete ✅
+**Built for enterprise HR automation** | Demonstrating AI governance, privacy, and operational efficiency.
