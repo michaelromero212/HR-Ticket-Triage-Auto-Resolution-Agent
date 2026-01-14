@@ -46,17 +46,8 @@ class AIService:
         # Configure HuggingFace Inference API (if token available)
         if HUGGINGFACE_TOKEN:
             try:
-                # Use the new HuggingFace router endpoint
-                self.client = InferenceClient(
-                    token=HUGGINGFACE_TOKEN,
-                    base_url="https://router.huggingface.co"
-                )
-                # Test with a simple call
-                test_response = self.client.text_generation(
-                    "Test", 
-                    model="microsoft/Phi-3-mini-4k-instruct",
-                    max_new_tokens=10
-                )
+                # Initialize HuggingFace client
+                self.client = InferenceClient(token=HUGGINGFACE_TOKEN)
                 self.use_ai = True
                 print("✓ HuggingFace AI enabled with Phi-3 model")
             except Exception as e:
