@@ -68,7 +68,7 @@ function App() {
 function Header({ onMenuClick }) {
     return (
         <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-            <div className="flex items-center justify-between px-4 py-3">
+            <div className="flex items-center justify-between px-4 py-3 md:pl-64">
                 {/* Left: Mobile menu + Logo */}
                 <div className="flex items-center gap-4">
                     <button
