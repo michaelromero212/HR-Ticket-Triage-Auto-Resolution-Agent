@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Environment variables (CRITICAL - contains API keys)
+.env
+backend/.env
+*.env.local
+
+# Node modules
+node_modules/
+frontend/node_modules/
+analytics/node_modules/
+
+# Build outputs
+frontend/dist/
+frontend/build/
+.cache/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+hr_tickets.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.pid
+
+# Mock data (optional - you can remove this if you want to commit it)
+backend/app/services/mock_data.json
+
+# Uploaded files
+backend/uploads/
+*.tmp
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
